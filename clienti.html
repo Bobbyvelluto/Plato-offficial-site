@@ -49,7 +49,7 @@
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            padding-right: 50px; /* Aumentato per sicurezza */
+            padding-right: 50px; 
             z-index: 2000;
             box-sizing: border-box;
         }
@@ -71,7 +71,7 @@
             gap: 8px;
             border-left: 1px solid rgba(255,255,255,0.3);
             padding-left: 20px;
-            min-width: 60px; /* Impedisce alla scritta ON/OFF di scappare */
+            min-width: 60px;
         }
 
         .speaker-svg { width: 18px; height: 18px; fill: #fff; }
@@ -157,7 +157,7 @@
             );
         }
 
-        /* --- SATELLITE STILE PULITO --- */
+        /* --- STILE DESKTOP ORIGINALE (Invariato) --- */
         .sat-card {
             background: #fff;
             border-radius: 50%;
@@ -166,12 +166,12 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            border: 1px solid var(--plato-orange); /* Bordo Sottile */
+            border: 3px solid var(--plato-orange); /* Bordo Desktop originale */
             box-shadow: 0 0 12px rgba(255, 140, 0, 0.4);
             animation: pulseSat 4s infinite ease-in-out;
             transition: all 0.3s ease;
             overflow: hidden;
-            padding: 10px; /* Più spazio interno */
+            padding: 5px; 
             box-sizing: border-box;
         }
 
@@ -196,14 +196,14 @@
             font-weight: 800;
             text-transform: uppercase;
             text-align: center;
-            width: 80%; /* Più stretto per non toccare i bordi bianchi */
+            width: 88%;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .sat-name-inner span { font-size: 6.5px; white-space: nowrap; }
-        .long-text span { font-size: 5px; }
+        .sat-name-inner span { font-size: 7px; white-space: nowrap; }
+        .long-text span { font-size: 5.5px; }
 
         /* ========================================================= */
         /* ====================== RESPONSIV ========================= */
@@ -219,6 +219,11 @@
             .header-section { top: 110px; }
             .center-logo-box { width: 28vh; }
             .top-nav { padding-right: 40px; }
+
+            /* Modifiche solo per Tablet */
+            .sat-card { border-width: 1px; padding: 10px; }
+            .sat-name-inner { width: 80%; }
+            .sat-name-inner span { font-size: 6.5px; }
         }
 
         @media (max-width: 768px) {
@@ -245,12 +250,13 @@
                 min-width: 50px;
             }
 
+            /* Modifiche solo per Mobile */
             .sat-card { 
-                padding: 10px; 
                 border-width: 1px; 
+                padding: 10px; 
             }
             .sat-logo-inner { width: 40%; margin-bottom: 2px; }
-            .sat-name-inner { width: 85%; }
+            .sat-name-inner { width: 85%; padding: 1px 3px; }
             .sat-name-inner span { font-size: 5.5px; }
             .long-text span { font-size: 4.2px; }
 
