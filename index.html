@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Platò</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #00AEEF;
+            --neon-green: #39FF14;
+            --fresh-green: #4CD964; 
+            --plato-orange: #FF8C00;
+            --text-light: #ffffff;
+            --fade-speed: 0.8s;
+        }
+
+        body, html {
+            margin: 0; padding: 0; height: 100%;
+            font-family: 'Inter', sans-serif; color: var(--text-light);
+            background-color: #000;
+            overflow: hidden;
+        }
+
+        .nav-wrapper {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .discover-link {
+            color: var(--text-light);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 11px;
+            font-weight: 300;
+            letter-spacing: 2.5px;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeIn var(--fade-speed) forwards 0.5s;
+            white-space: nowrap;
+        }
+
+        .top-nav {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 12px 25px;
+            border-radius: 50px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+        }
+
+        .top-nav ul { list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; }
+        .top-nav a { color: var(--plato-orange); text-decoration: none; text-transform: uppercase; font-size: 11px; font-weight: 900; letter-spacing: 1.5px; }
+
+        .main-container {
+            background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url('plato-agricoltore-chef-verdure-fresche.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; 
+            position: relative;
+        }
+
+        .header-content {
+            text-align: center;
+            max-width: 1100px;
+            opacity: 0;
+            animation: fadeInUp var(--fade-speed) ease-out forwards 0.3s;
+            padding: 0 40px;
+            margin-top: 500px; /* Altezza Desktop */
+        }
+        
+        h1 { 
+            color: var(--text-light);
+            font-size: 48px; 
+            margin: 0; 
+            text-transform: uppercase; 
+            font-weight: 900;
+            line-height: 1.1;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.6);
+        }
+
+        h1 span.sub-line {
+            display: block;
+            color: var(--primary-blue);
+            font-size: 24px;
+            letter-spacing: 6px;
+            margin-top: 15px;
+            font-weight: 400;
+            white-space: nowrap; /* Evita che vada a capo su desktop */
+        }
+
+        .highlight-green {
+            color: var(--fresh-green);
+            font-weight: 400;
+            text-transform: uppercase;
+        }
+
+        .coccarda-container {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .coccarda-img {
+            width: 150px;
+            height: auto;
+            mix-blend-mode: multiply;
+            filter: contrast(110%);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* --- MODIFICHE RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .nav-wrapper {
+                top: 20px;
+                right: 50%;
+                transform: translateX(50%); /* Centra il menu su mobile */
+                width: 90%;
+            }
+
+            .header-content { 
+                margin-top: 350px; /* Abbassato per non coprire il soggetto */
+                padding: 0 20px;
+            }
+
+            h1 { font-size: 26px; }
+
+            h1 span.sub-line { 
+                font-size: 13px; 
+                letter-spacing: 2px;
+                white-space: nowrap; /* Forza il testo su una riga sola */
+                margin-top: 10px;
+            }
+
+            .coccarda-img { 
+                width: 90px; 
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav-wrapper">
+        <a href="chi-siamo.html" class="discover-link">Scopri il mondo Platò</a>
+        <nav class="top-nav">
+            <ul>
+                <li><a href="index.html" style="color: #fff;">Home</a></li>
+                <li><a href="chi-siamo.html">Chi Siamo</a></li>
+                <li><a href="clienti.html">Clienti</a></li>
+                <li><a href="contatti.html">Contatti</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="main-container">
+        <div class="header-content">
+            <h1>Dal produttore alla tua cucina
+                <span class="sub-line">Senza filtri, <span class="highlight-green">solo qualità</span></span>
+            </h1>
+            <div class="coccarda-container">
+                <img src="coccarda.png" class="coccarda-img" alt="Certificato Platò">
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

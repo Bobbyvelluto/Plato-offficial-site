@@ -1,0 +1,35 @@
+
+/* OTTIMIZZAZIONE COCCARDA */
+.coccarda-clean {
+    mix-blend-mode: multiply; /* Elimina istantaneamente lo sfondo bianco su sfondi chiari */
+    filter: contrast(110%) brightness(105%);
+    width: 150px;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+}
+
+/* Se lo sfondo del sito è scuro, usiamo questo invece: */
+.coccarda-dark-bg {
+    mix-blend-mode: screen; /* Inverte e pulisce il bianco su sfondo nero */
+    filter: invert(0); 
+    width: 150px;
+}
+
+/* STILE COCCARDA UNIFICATO */
+.coccarda-certified {
+    display: inline-block !important;
+    width: 45px !important;
+    height: auto !important;
+    margin: 10px auto !important;
+    mix-blend-mode: multiply !important;
+    filter: contrast(110%);
+    vertical-align: middle;
+}/* Posizionamento specifico per la pagina Clienti (a destra) */
+.clienti-header-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+

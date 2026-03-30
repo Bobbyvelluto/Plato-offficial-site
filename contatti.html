@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contatti | Platò</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #00AEEF;
+            --neon-green: #39FF14;
+            --plato-orange: #FF8C00;
+            --text-light: #ffffff;
+            --bg-accent: rgba(0, 0, 0, 0.85);
+        }
+
+        body, html {
+            margin: 0; padding: 0; min-height: 100%;
+            font-family: 'Inter', sans-serif; color: var(--text-light);
+            background-color: #000;
+            overflow-x: hidden;
+        }
+
+        .main-container {
+            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('plato-agricoltore-chef-verdure-fresche.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 80px 20px 40px 20px;
+            box-sizing: border-box;
+        }
+
+        /* --- STILI DESKTOP (Invariati) --- */
+        .top-nav {
+            position: fixed; top: 20px; right: 40px; z-index: 1000;
+            background: rgba(0, 0, 0, 0.5); padding: 10px 20px;
+            border-radius: 50px; backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .top-nav ul { list-style: none; display: flex; gap: 20px; margin: 0; padding: 0; }
+        .top-nav a { color: var(--plato-orange); text-decoration: none; text-transform: uppercase; font-size: 10px; font-weight: 900; letter-spacing: 1px; }
+        .top-nav a.active { color: var(--text-light); text-shadow: 0 0 8px var(--plato-orange); }
+
+        .header-section { text-align: center; margin-bottom: 25px; }
+        h1 { font-size: 32px; font-weight: 900; text-transform: uppercase; margin: 0; letter-spacing: 3px; }
+        h2 { color: var(--primary-blue); font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin-top: 2px; }
+
+        .contact-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+            max-width: 480px;
+        }
+
+        .contact-card {
+            background: var(--bg-accent);
+            border: 1px solid var(--primary-blue);
+            padding: 20px; /* Padding Desktop Originale */
+            border-radius: 12px;
+            text-align: center;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(15px);
+            animation: slideIn 0.6s ease forwards;
+        }
+        
+        @keyframes slideIn { to { opacity: 1; transform: translateY(0); } }
+
+        .contact-card:nth-child(1) { animation-delay: 0.2s; }
+        .contact-card:nth-child(2) { animation-delay: 0.3s; }
+        .contact-card:nth-child(3) { animation-delay: 0.4s; }
+        .contact-card:nth-child(4) { animation-delay: 0.5s; }
+        .contact-card:nth-child(5) { animation-delay: 0.6s; }
+
+        .contact-label { color: var(--plato-orange); font-weight: 900; text-transform: uppercase; font-size: 13px; margin-bottom: 6px; display: block; }
+        .contact-email { color: var(--primary-blue); text-decoration: none; font-size: 17px; font-weight: 700; display: block; }
+        .contact-phone { color: var(--primary-blue); font-weight: 700; font-size: 17px; margin-top: 6px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .phone-icon { width: 16px; height: 16px; fill: var(--primary-blue); }
+        .contact-desc { color: rgba(255, 255, 255, 0.7); font-size: 12.5px; margin: 10px 0 0 0; line-height: 1.5; text-align: center; }
+
+        /* ========================================================= */
+        /* ====================== SOLO MOBILE ======================= */
+        /* ========================================================= */
+
+        @media (max-width: 768px) {
+            .top-nav { top: 12px; right: 12px; left: 12px; padding: 8px 14px; border-radius: 18px; max-width: 92vw; margin: 0 auto; }
+            .top-nav ul { gap: 10px; justify-content: center; }
+            .top-nav a { font-size: 9px; }
+
+            .main-container { padding-top: 200px; padding-left: 10px; padding-right: 10px; }
+            h1 { font-size: 20px; }
+            h2 { font-size: 9px; margin-bottom: 15px; }
+
+            /* Grid più stretta lateralmente */
+            .contact-grid {
+                max-width: 50%; /* Qui regoli quanto deve essere stretto il box sul telefono */
+                gap: 6px; 
+                margin: 0 auto;
+            }
+
+            /* Padding ridotto solo per Mobile */
+            .contact-card {
+                padding: 8px 5px; 
+                border-radius: 10px;
+            }
+
+            .contact-label { font-size: 9px; margin-bottom: 2px; }
+            .contact-email { font-size: 13px; }
+            .contact-phone { font-size: 13px; margin-top: 2px; }
+            .contact-desc { font-size: 10px; margin-top: 4px; line-height: 1.2; }
+            .phone-icon { width: 12px; height: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="top-nav">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="chi-siamo.html">Chi Siamo</a></li>
+            <li><a href="clienti.html">Clienti</a></li>
+            <li><a href="contatti.html" class="active">Contatti</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-container">
+        <div class="header-section">
+            <h1>CONTATTI</h1>
+            <h2>PER OGNI ESIGENZA</h2>
+        </div>
+
+        <div class="contact-grid">
+            <div class="contact-card">
+                <span class="contact-label">Direzione</span>
+                <a href="mailto:m.arena@platò.it" class="contact-email">m.arena@platò.it</a>
+                <span class="contact-phone">
+                    <svg class="phone-icon" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                    3355405933
+                </span>
+            </div>
+
+            <div class="contact-card">
+                <span class="contact-label">Richieste Generali</span>
+                <a href="mailto:info@platò.it" class="contact-email">info@platò.it</a>
+                <p class="contact-desc">Informazioni commerciali e collaborazioni.</p>
+            </div>
+
+            <div class="contact-card">
+                <span class="contact-label">Supporto Clienti</span>
+                <a href="mailto:clienti@platò.it" class="contact-email">clienti@platò.it</a>
+                <p class="contact-desc">Assistenza tecnica e logistica.</p>
+            </div>
+
+            <div class="contact-card">
+                <span class="contact-label">Reparto Fornitori</span>
+                <a href="mailto:fornitori@platò.it" class="contact-email">fornitori@platò.it</a>
+                <p class="contact-desc">Coordinamento forniture e tracciabilità.</p>
+            </div>
+
+            <div class="contact-card">
+                <span class="contact-label">Amministrazione</span>
+                <a href="mailto:amministrazione@platò.it" class="contact-email">amministrazione@platò.it</a>
+                <p class="contact-desc">Pagamenti e fatturazione.</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Nostri Clienti | Platò</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-blue: #00AEEF; 
+            --bg-calm-transparent: rgba(0, 0, 0, 0.75); 
+            --logo-size: 35vh; 
+            --sat-size: 85px; 
+            --plato-orange: #FF8C00;
+            --neon-green: #39FF14;
+            --text-white: #ffffff;
+            --orbit-radius: 260px; 
+        }
+
+        body, html {
+            margin: 0; padding: 0; height: 100%;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            background-color: #000; 
+        }
+
+        .background-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('plato-chef-cucina-ristorante-hd.png');
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+        }
+
+        .color-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--bg-calm-transparent);
+            z-index: -1;
+        }
+
+        .top-nav {
+            position: fixed;
+            top: 0; width: 100%;
+            height: 80px;
+            background: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 30px;
+            z-index: 2000;
+        }
+
+        .top-nav a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 13px;
+            font-weight: 800;
+            margin-left: 20px;
+        }
+
+        .audio-ctrl {
+            margin-left: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-left: 1px solid rgba(255,255,255,0.3);
+            padding-left: 20px;
+        }
+
+        .speaker-svg { width: 18px; height: 18px; fill: #fff; }
+        .audio-status { color: #fff; font-size: 11px; font-weight: 900; }
+
+        .header-section { 
+            position: absolute;
+            top: 130px;
+            width: 100%;
+            text-align: center; 
+            z-index: 1500;
+            pointer-events: none; 
+        }
+
+        h1 { font-size: 50px; font-weight: 900; color: #fff; margin: 0; text-shadow: 0 4px 10px rgba(0,0,0,0.8); }
+        h2 { color: #fff; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 4px; opacity: 0.9; }
+
+        .main-stage {
+            position: relative;
+            width: 100vw; height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        /* --- LOGO CENTRALE E COCCARDA SOVRAPPOSTA --- */
+        .center-logo-box {
+            position: absolute;
+            z-index: 20;
+            width: var(--logo-size);
+            position: relative; 
+            animation: pulseCenter 5s infinite ease-in-out;
+        }
+
+        .main-logo-img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* La coccarda come timbro interno, posizionata sopra la scritta */
+        .gpi-seal-inline {
+            position: absolute;
+            /* Posiziona in basso al centro all'interno del cerchio */
+            bottom: 11%; 
+            left: 50%;
+            transform: translateX(-50%);
+            /* DIMENSIONI AUMENTATE (era 14%) */
+            width: 20%; 
+            height: auto;
+            z-index: 25;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.6));
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .gpi-seal-inline:hover {
+            transform: translateX(-50%) scale(1.1) rotate(5deg);
+            filter: drop-shadow(0 0 14px var(--neon-green));
+        }
+
+        @keyframes pulseCenter { 
+            0%, 100% { transform: scale(1); } 
+            50% { transform: scale(1.03); } 
+        }
+
+        .orbit-container {
+            position: absolute;
+            width: 100%; height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .client-satellite {
+            position: absolute;
+            width: var(--sat-size);
+            height: var(--sat-size);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            --angle: calc(var(--i) * 40deg);
+            transform: translate(
+                calc(cos(var(--angle)) * var(--orbit-radius)),
+                calc(sin(var(--angle)) * var(--orbit-radius))
+            );
+        }
+
+        .sat-card {
+            background: #fff;
+            border-radius: 50%;
+            width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid var(--plato-orange);
+            box-shadow: 0 0 12px rgba(255, 140, 0, 0.4);
+            animation: pulseSat 4s infinite ease-in-out;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+
+        @keyframes pulseSat { 
+            0%, 100% { transform: scale(1); } 
+            50% { transform: scale(1.08); } 
+        }
+
+        .client-satellite:hover .sat-card {
+            border-color: var(--neon-green);
+            box-shadow: 0 0 25px var(--neon-green);
+            transform: scale(1.15);
+        }
+
+        .sat-logo-inner { width: 35%; height: auto; margin-bottom: 4px; object-fit: contain; }
+
+        .sat-name-inner {
+            background: #333; 
+            color: #fff; 
+            padding: 2px 6px; 
+            border-radius: 2px;
+            font-weight: 800;
+            text-transform: uppercase;
+            text-align: center;
+            width: 88%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sat-name-inner span { font-size: 7px; white-space: nowrap; }
+        .long-text span { font-size: 5.5px; }
+
+        /* ========================================================= */
+        /* ====================== TABLET ============================ */
+        /* ========================================================= */
+
+        @media (max-width: 1024px) {
+            :root {
+                --orbit-radius: 180px;
+                --sat-size: 75px;
+            }
+            h1 { font-size: 38px; }
+            h2 { font-size: 12px; letter-spacing: 3px; }
+            .header-section { top: 110px; }
+            .center-logo-box { width: 28vh; }
+        }
+
+        /* ========================================================= */
+        /* ====================== MOBILE ============================ */
+        /* ========================================================= */
+
+        @media (max-width: 768px) {
+            :root {
+                --orbit-radius: 125px; 
+                --sat-size: 60px;
+            }
+
+            .center-logo-box { width: 22vh; }
+            
+            .gpi-seal-inline {
+                bottom: 11%; 
+                width: 22%; /* Leggermente più grande su mobile per leggibilità */
+            }
+
+            .sat-logo-inner { width: 48%; margin-bottom: 2px; }
+            .sat-name-inner span { font-size: 6px; }
+            .long-text span { font-size: 4.5px; }
+
+            h1 { font-size: 26px; }
+            h2 { font-size: 11px; letter-spacing: 2px; }
+            .header-section { top: 90px; }
+            .top-nav { height: 60px; padding-right: 15px; }
+            .top-nav a { font-size: 11px; margin-left: 12px; }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="background-overlay"></div>
+    <div class="color-overlay"></div>
+
+    <nav class="top-nav">
+        <a href="index.html">Home</a>
+        <a href="chi-siamo.html">Chi Siamo</a>
+        <a href="clienti.html" style="border-bottom: 2px solid #fff;">Clienti</a>
+        <a href="contatti.html">Contatti</a>
+
+        <div class="audio-ctrl" id="audio-btn">
+            <svg class="speaker-svg" viewBox="0 0 24 24" id="spk-icon">
+                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+            </svg>
+            <span class="audio-status" id="status-txt">OFF</span>
+        </div>
+    </nav>
+
+    <audio id="bg-audio" autoplay loop>
+        <source src="roma-instrumental.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="header-section">
+        <h1>I NOSTRI CLIENTI</h1>
+        <h2>ECCELLENZA ROMANA CERTIFICATA PLATÒ</h2>
+    </div>
+
+    <div class="main-stage">
+        <div class="center-logo-box">
+            <img src="logo-plato-hd.png" class="main-logo-img" alt="Platò Logo">
+            <a href="https://gpi-intelligence.com" target="_blank" class="gpi-seal-link">
+                <img src="coccarda.png" class="gpi-seal-inline" alt="GPI Certified Seal">
+            </a>
+        </div>
+
+        <div class="orbit-container">
+            <a href="https://www.anticapesa.it" target="_blank" class="client-satellite" style="--i:0"><div class="sat-card"><img src="logo-plato-hd.png" class="sat-logo-inner"><div class="sat-name-inner"><span>Antica Pesa</span></div></div></a>
+            <a href="https://www.soralella.com" target="_blank" class="client-satellite" style="--i:1"><div class="sat-card"><img src="logo-plato-hd.png" class="sat-logo-inner"><div class="sat-name-inner"><span>Sora Lella</span></div></div></a>
+            <a href="https://www.feliceatestaccio.it" target="_blank" class="client-satellite" style="--i:2"><div class="sat-card"><img src="logo-plato-hd.png" class="sat-logo-inner"><div class="sat-name-inner long-text"><span>Felice a Testaccio</span></div></div></a>
+            <a href="https://www.romecavalieri.com/it/la-pergola" target="_blank" class="client-satellite" style="--i:3"><div class="sat-card"><img src="logo-plato-hd.png" class="sat-logo-inner"><div class="sat-name-inner"><span>La Pergola</span></div></div></a>
+            <a href="https://www.salumeriaroscioli.com" target="_blank" class="client-satellite" style="--i:4"><div class="sat-card"><img src="logo-plato-hd.png" class="sat-logo-inner"><div class="sat-name-inner"><span>Roscioli</span></div></div></a>
+            <a href="https://www.armandoalpantheon.it" target="_blank" class="client-satellite" style="--i:5"><div class="sat-card"><img src="logo-plato-hd.png" class="sat-logo-inner"><div class="sat-name-inner long-text"><span>Armando al Pantheon</span></div></div></a>
+            <a href="https://www.pierluigi.it" target="_blank" class="client-satellite" style="--i:6"><div class="sat-card"><img src="logo-plato-hd.png" class="sat-logo-inner"><div class="sat-name-inner"><span>Pierluigi</span></div></div></a>
+            <a href="https://www.daenzoal29.com" target="_blank" class="client-satellite" style="--i:7"><div class="sat-card"><img src="logo-plato-hd.png" class="sat-logo-inner"><div class="sat-name-inner"><span>Da Enzo al 29</span></div></div></a>
+            <a href="https://www.tavernatrilussa.it" target="_blank" class="client-satellite" style="--i:8"><div class="sat-card"><img src="logo-plato-hd.png" class="sat-logo-inner"><div class="sat-name-inner long-text"><span>Taverna Trilussa</span></div></div></a>
+        </div>
+    </div>
+
+    <script>
+        const audio = document.getElementById('bg-audio');
+        const btn = document.getElementById('audio-btn');
+        const txt = document.getElementById('status-txt');
+
+        audio.volume = 0.25;
+
+        window.addEventListener('load', () => {
+            audio.play().then(() => {
+                txt.innerText = 'ON';
+            }).catch(() => {
+                document.addEventListener('click', () => {
+                    audio.play();
+                    txt.innerText = 'ON';
+                }, { once: true });
+            });
+        });
+
+        btn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                txt.innerText = 'ON';
+            } else {
+                audio.pause();
+                txt.innerText = 'OFF';
+            }
+        });
+    </script>
+
+</body>
+</html>
