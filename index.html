@@ -121,18 +121,18 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             filter: contrast(110%);
             animation: softPulse 3s infinite ease-in-out;
-            /* Ottimizzazioni per Mobile Reale */
             -webkit-tap-highlight-color: transparent;
             user-select: none;
             -webkit-user-drag: none;
+            display: block;
+            margin: 0 auto;
         }
 
         @keyframes softPulse {
             0%, 100% { transform: scale(1); filter: contrast(110%); }
-            50% { transform: scale(1.03); filter: contrast(110%) drop-shadow(0 0 8px rgba(57, 255, 20, 0.3)); }
+            50% { transform: scale(1.03); filter: contrast(110%) drop-shadow(0 0 10px rgba(57, 255, 20, 0.4)); }
         }
 
-        /* Effetto Click/Touch: Contorno Verde, Colori Originali */
         .coccarda-img.active {
             filter: contrast(110%) drop-shadow(0 0 20px var(--neon-green));
             transform: scale(1.08);
@@ -141,7 +141,7 @@
 
         .popover-gpi {
             position: absolute;
-            top: 110%; 
+            top: 115%; 
             left: 50%;
             transform: translateX(-50%) translateY(-10px);
             background: rgba(57, 255, 20, 0.95); 
@@ -155,7 +155,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             pointer-events: none;
             opacity: 0;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease-out;
             z-index: 2000;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.6), 0 0 5px rgba(0,0,0,0.3); 
         }
@@ -188,8 +188,8 @@
             .header-content { margin-top: 350px; padding: 0 20px; }
             h1 { font-size: 26px; }
             h1 span.sub-line { font-size: 13px; letter-spacing: 2px; white-space: nowrap; margin-top: 10px; }
-            .coccarda-img { width: 90px; margin-top: 10px; }
-            .popover-gpi { width: 220px; font-size: 11px; padding: 10px 15px; }
+            .coccarda-img { width: 95px; margin-top: 10px; }
+            .popover-gpi { width: 230px; font-size: 11px; padding: 12px 15px; }
         }
     </style>
 </head>
@@ -227,25 +227,34 @@
         let timer;
 
         function activatePopover(e) {
-            // Evita doppi eventi click/touch
-            if (e && e.type === 'touchstart') {
-                e.preventDefault();
+            // Impedisce conflitti e click fantasma su mobile
+            if (e) {
+                if (e.cancelable) e.preventDefault();
+                e.stopPropagation();
             }
             
+            // Pulisce lo stato precedente per reset immediato
             clearTimeout(timer);
-            
+            popover.classList.remove('show');
+            coccarda.classList.remove('active');
+
+            // Trucco del Reflow: resetta il ciclo CSS dell'animazione
+            void coccarda.offsetWidth; 
+
+            // Attivazione
             popover.classList.add('show');
             coccarda.classList.add('active');
 
+            // Timer di chiusura (3.8 secondi)
             timer = setTimeout(() => {
                 popover.classList.remove('show');
                 coccarda.classList.remove('active');
             }, 3800);
         }
 
-        // Listener per Mobile (Touch Reale) e Desktop (Click)
+        // Eventi dedicati per Mobile e Desktop
         coccarda.addEventListener('touchstart', activatePopover, {passive: false});
-        coccarda.addEventListener('click', activatePopover);
+        coccarda.addEventListener('mousedown', activatePopover);
     </script>
 
 </body>
