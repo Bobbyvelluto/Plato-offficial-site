@@ -106,6 +106,7 @@
             text-transform: uppercase;
         }
 
+        /* --- COCCARDA E POPOVER --- */
         .coccarda-container {
             margin-top: 30px;
             text-align: center;
@@ -119,8 +120,11 @@
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             filter: contrast(110%);
-            /* Animazione pulsante per attirare l'attenzione */
             animation: softPulse 3s infinite ease-in-out;
+            /* Ottimizzazioni per Mobile Reale */
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            -webkit-user-drag: none;
         }
 
         @keyframes softPulse {
@@ -128,17 +132,11 @@
             50% { transform: scale(1.03); filter: contrast(110%) drop-shadow(0 0 8px rgba(57, 255, 20, 0.3)); }
         }
 
-        /* Hover su Desktop */
-        .coccarda-img:hover {
-            filter: contrast(110%) drop-shadow(0 0 15px var(--neon-green));
-            transform: scale(1.05);
-        }
-
-        /* Stato Attivo (Click/Tap) */
+        /* Effetto Click/Touch: Contorno Verde, Colori Originali */
         .coccarda-img.active {
             filter: contrast(110%) drop-shadow(0 0 20px var(--neon-green));
             transform: scale(1.08);
-            animation: none; /* Ferma la pulsazione quando attiva */
+            animation: none;
         }
 
         .popover-gpi {
@@ -190,7 +188,7 @@
             .header-content { margin-top: 350px; padding: 0 20px; }
             h1 { font-size: 26px; }
             h1 span.sub-line { font-size: 13px; letter-spacing: 2px; white-space: nowrap; margin-top: 10px; }
-            .coccarda-img { width: 100px; margin-top: 10px; }
+            .coccarda-img { width: 90px; margin-top: 10px; }
             .popover-gpi { width: 220px; font-size: 11px; padding: 10px 15px; }
         }
     </style>
@@ -228,8 +226,12 @@
         const popover = document.getElementById('gpi-popover');
         let timer;
 
-        function activatePopover() {
-            // Se c'è un timer attivo, lo resetto
+        function activatePopover(e) {
+            // Evita doppi eventi click/touch
+            if (e && e.type === 'touchstart') {
+                e.preventDefault();
+            }
+            
             clearTimeout(timer);
             
             popover.classList.add('show');
@@ -241,7 +243,8 @@
             }, 3800);
         }
 
-        // Funziona sia su click che su touch (mobile)
+        // Listener per Mobile (Touch Reale) e Desktop (Click)
+        coccarda.addEventListener('touchstart', activatePopover, {passive: false});
         coccarda.addEventListener('click', activatePopover);
     </script>
 
