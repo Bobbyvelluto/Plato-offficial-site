@@ -14,23 +14,30 @@
     --text-light: #ffffff;
 }
 
+/* Fix caricamento: sfondo nero subito, poi immagine */
 body, html {
     margin: 0; padding: 0; height: 100%;
-    font-family: 'Inter', sans-serif; background-color: #000;
+    font-family: 'Inter', sans-serif; 
+    background-color: #0d0d0d; 
+    overflow: hidden; /* Evita scrollbars */
 }
 
-/* SFONDO */
+/* SFONDO OTTIMIZZATO */
 .hero {
     position: relative;
     width: 100%;
     height: 100vh;
-    background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), url('cassa_plato.png');
+    background: #000 url('cassa_plato.png') no-repeat center center;
     background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    opacity: 0;
+    animation: fadeInHero 0.8s ease-in forwards;
 }
 
-/* NAVIGAZIONE UNIFORMATA ALLA HOME */
+@keyframes fadeInHero {
+    to { opacity: 1; }
+}
+
+/* NAVIGAZIONE */
 .nav-wrapper {
     position: absolute;
     top: 30px;
@@ -64,7 +71,116 @@ body, html {
     text-shadow: 0 0 8px var(--plato-orange);
 }
 
-/* ICONA AUDIO */
+/* PIANO OPERATIVO */
+.piano-operativo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 280px;
+    background: rgba(0,0,0,0.7);
+    padding: 25px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    color: white;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.piano-operativo h3 {
+    margin: 0 0 20px 0;
+    color: var(--neon-green);
+    text-transform: uppercase;
+    font-size: 22px;
+    letter-spacing: 1px;
+}
+
+/* STEP CON PULSAZIONE AZZURRA LEGGERA */
+.step {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px;
+    margin-bottom: 12px;
+    border: 1.5px solid var(--neon-green);
+    border-radius: 10px;
+    cursor: pointer;
+    background: rgba(0,0,0,0.4);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 12px;
+    transition: all 0.3s ease;
+    /* Animazione resa più evidente */
+    animation: pulseGlowAzzurro 3.5s infinite ease-in-out;
+}
+
+/* Nuova Animazione Pulsante: Bordo Azzurro Ciano Leggero */
+@keyframes pulseGlowAzzurro {
+    0% { transform: scale(1); filter: brightness(1); border-color: var(--neon-green); }
+    50% { 
+        transform: scale(1.025); 
+        filter: brightness(1.2); 
+        /* Azzurro ciano leggero al posto del bianco */
+        border-color: rgba(0, 238, 255, 0.6); 
+        box-shadow: 0 0 12px rgba(0, 174, 239, 0.25); 
+    }
+    100% { transform: scale(1); filter: brightness(1); border-color: var(--neon-green); }
+}
+
+/* Ritardi per effetto cascata */
+.step:nth-child(2) { animation-delay: 0s; }
+.step:nth-child(3) { animation-delay: 0.7s; }
+.step:nth-child(4) { animation-delay: 1.4s; }
+.step:nth-child(5) { animation-delay: 2.1s; }
+.step:nth-child(6) { animation-delay: 2.8s; }
+
+/* Hover: diventa Verde Pieno e si ferma */
+.step:hover {
+    background: var(--neon-green);
+    color: #000;
+    transform: scale(1.06) !important;
+    animation-play-state: paused;
+    box-shadow: 0 5px 20px rgba(50, 205, 50, 0.4);
+}
+
+/* POPOVER OTTIMIZZATO PER LEGGIBILITÀ */
+.popover {
+    position: fixed;
+    display: none;
+    width: 260px;
+    background: rgba(5, 202, 47, 0.96); /* Più opaco */
+    padding: 18px;
+    border-radius: 12px;
+    border: 1px solid white; 
+    z-index: 1100;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+    text-align: center;
+}
+
+/* Testo Popover: Bianco con Ombra Scura Netta */
+.popover h4 { 
+    margin: 0 0 8px 0; 
+    color: white; 
+    text-transform: uppercase; 
+    font-size: 16px; 
+    font-weight: 900;
+    letter-spacing: 1px;
+    /* Ombra testo per massima leggibilità */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.7), 0 0 5px rgba(0,0,0,0.4);
+} 
+
+.popover p { 
+    margin: 0; 
+    color: white; /* Testo Bianco */
+    font-size: 14px; 
+    line-height: 1.4; 
+    font-weight: 700; /* Più spesso per leggere meglio */
+    /* Ombra testo rinforzata */
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.6), 0 0 4px rgba(0,0,0,0.3);
+}
+
+/* AUDIO CTRL */
 .audio-ctrl {
     cursor: pointer;
     display: flex;
@@ -77,65 +193,6 @@ body, html {
 
 .audio-ctrl.glow { filter: drop-shadow(0 0 8px var(--plato-orange)); }
 
-/* PIANO OPERATIVO */
-.piano-operativo {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 250px;
-    background: rgba(0,0,0,0.65);
-    padding: 25px;
-    border-radius: 15px;
-    backdrop-filter: blur(8px);
-    color: white;
-    text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.piano-operativo h3 {
-    margin: 0 0 20px 0;
-    color: var(--neon-green);
-    text-transform: uppercase;
-    font-size: 22px;
-    letter-spacing: 1px;
-}
-
-.step {
-    padding: 14px;
-    margin-bottom: 12px;
-    border: 1.5px solid var(--neon-green);
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: 400;
-    background: rgba(0,0,0,0.3);
-}
-
-.step:hover {
-    background: rgba(50,205,50,0.25);
-    border-color: var(--plato-orange);
-    transform: scale(1.02);
-}
-
-/* POPOVER */
-.popover {
-    position: fixed;
-    display: none;
-    width: 260px;
-    background: rgba(5, 202, 47, 0.9);
-    padding: 18px;
-    border-radius: 12px;
-    border: 1px solid white; 
-    color: rgb(8, 21, 108);
-    text-align: center;
-    z-index: 1100;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-
-.popover h4 { margin: 0 0 8px 0; color: white; text-transform: uppercase; font-size: 16px; } 
-.popover p { margin: 0; font-size: 14px; line-height: 1.4; font-weight: 300; }
-
 /* OFFRE PLATÒ */
 .bottom-box {
     position: absolute;
@@ -143,7 +200,7 @@ body, html {
     left: 50%;
     transform: translateX(-50%);
     width: 340px;
-    background: rgba(0,0,0,0.8);
+    background: rgba(0,0,0,0.85);
     padding: 15px;
     border-radius: 12px;
     text-align: center;
@@ -158,36 +215,20 @@ body, html {
 /* RESPONSIVE */
 @media (max-width: 768px) {
     .nav-wrapper { top: 15px; right: 0; left: 0; width: 100%; display: flex; justify-content: center; }
-    .top-nav { gap: 12px; padding: 10px 15px; border-radius: 20px; width: 90%; justify-content: center; }
+    .top-nav { width: 90%; gap: 10px; padding: 10px 15px; }
     .top-nav a { font-size: 8px; letter-spacing: 0.5px; }
-    .audio-ctrl { padding-left: 8px; }
+    .audio-ctrl { padding-left: 10px; }
     
-    /* BOX PIANO OPERATIVO MINI */
-    .piano-operativo { 
-        width: 35%; 
-        top: 60%; 
-        padding: 12px;
-    }
+    .piano-operativo { width: 75%; top: 55%; padding: 18px; }
+    .piano-operativo h3 { font-size: 16px; }
+    .step { font-size: 10px; padding: 10px; margin-bottom: 8px; }
     
-    .piano-operativo h3 {
-        font-size: 14px;
-        margin-bottom: 10px;
-    }
-
-    .step {
-        font-size: 9px;       /* Font interno rimpicciolito */
-        padding: 6px;        /* Padding interno ridotto */
-        margin-bottom: 5px;  /* Spazio tra step ridotto */
-    }
-
-    .popover { left: 50% !important; transform: translateX(-50%) !important; top: 30% !important; width: 50%; }
+    .popover { width: 70%; left: 15% !important; transform: none !important; padding: 15px; }
+    .popover h4 { font-size: 14px; }
+    .popover p { font-size: 12px; }
     
-    .bottom-box { 
-        width: 85%; 
-        bottom: 10%; 
-        padding: 10px; 
-    } 
-    .bottom-box h4 { font-size: 12px; }
+    .bottom-box { width: 85%; bottom: 8%; }
+    .bottom-box h4 { font-size: 14px; }
 }
 </style>
 </head>
@@ -216,8 +257,8 @@ body, html {
         <div class="step" data-title="Analisi Dati" data-text="Studio e valutazione di costi sostenuti negli ultimi due mesi.">1. Analisi Dati</div>
         <div class="step" data-title="Benchmarking" data-text="Confronto dei costi con i nostri listini per identificare le aree di miglioramento.">2. Benchmarking</div>
         <div class="step" data-title="Presentazione risparmio" data-text="Presentazione del valore stimato del risparmio.">3. Presentazione risparmio</div>
-        <div class="step" data-title="Disintermediazione" data-text="Proposta di cambio di modello di acquisto.<br>Qualità dei prodotti uguale o superiore">4. Disintermediazione</div>
-        <div class="step" data-title="Monitoraggio SaaS" data-text="Platò offre assistenza continuativa e monitoraggio nel tempo per continuare a garantire il risparmio.">5. Monitoraggio SaaS</div>
+        <div class="step" data-title="Disintermediazione" data-text="Proposta di cambio di modello di acquisto.<br>Qualità dei prodotti uguale o superiore.">4. Disintermediazione</div>
+        <div class="step" data-title="Monitoraggio SaaS" data-text="Platò offre assistenza continuativa e monitoraggio nel tempo per garantire il risparmio.">5. Monitoraggio SaaS</div>
     </div>
 
     <div id="popover" class="popover"></div>
@@ -234,26 +275,31 @@ body, html {
 document.addEventListener('DOMContentLoaded', () => {
     const pop = document.getElementById('popover');
     const steps = document.querySelectorAll('.step');
+    const audio = document.getElementById('bgAudio');
 
+    // Funzione click step
     steps.forEach(step => {
         step.addEventListener('click', (e) => {
             const title = step.dataset.title;
             const text = step.dataset.text;
+            // Popover popolato
             pop.innerHTML = `<h4>${title}</h4><p>${text}</p>`;
             pop.style.display = 'block';
 
+            // Posizionamento Desktop a destra dello step
             if(window.innerWidth > 768) {
                 const rect = step.getBoundingClientRect();
                 pop.style.top = (rect.top) + 'px';
-                pop.style.left = (rect.right + 20) + 'px';
+                pop.style.left = (rect.right + 25) + 'px';
             }
 
+            // Auto-chiusura
             clearTimeout(pop._timer);
-            pop._timer = setTimeout(() => { pop.style.display = 'none'; }, 4000);
+            pop._timer = setTimeout(() => { pop.style.display = 'none'; }, 4500);
         });
     });
 
-    const audio = document.getElementById('bgAudio');
+    // Audio Toggle
     const toggle = document.getElementById('audioToggle');
     const iconOn = document.getElementById('iconOn');
     const iconOff = document.getElementById('iconOff');
