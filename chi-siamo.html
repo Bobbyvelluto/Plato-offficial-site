@@ -16,9 +16,7 @@
 
 body, html {
     margin: 0; padding: 0; height: 100%;
-    font-family: 'Inter', sans-serif; 
-    background-color: #0d0d0d; 
-    overflow: hidden;
+    font-family: 'Inter', sans-serif; background-color: #0d0d0d; overflow: hidden;
 }
 
 .hero {
@@ -31,10 +29,9 @@ body, html {
     animation: fadeInHero 0.8s ease-in forwards;
 }
 
-@keyframes fadeInHero {
-    to { opacity: 1; }
-}
+@keyframes fadeInHero { to { opacity: 1; } }
 
+/* NAVIGAZIONE DESKTOP */
 .nav-wrapper {
     position: absolute;
     top: 30px;
@@ -60,12 +57,6 @@ body, html {
     font-size: 11px;
     font-weight: 900;
     letter-spacing: 1.5px;
-    transition: 0.3s ease;
-}
-
-.top-nav a:hover {
-    color: var(--text-light);
-    text-shadow: 0 0 8px var(--plato-orange);
 }
 
 .piano-operativo {
@@ -73,15 +64,14 @@ body, html {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 280px;
-    background: rgba(0,0,0,0.7);
+    width: 250px;
+    background: rgba(0,0,0,0.65);
     padding: 25px;
     border-radius: 15px;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(8px);
     color: white;
     text-align: center;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
 }
 
 .piano-operativo h3 {
@@ -89,37 +79,23 @@ body, html {
     color: var(--neon-green);
     text-transform: uppercase;
     font-size: 22px;
-    letter-spacing: 1px;
 }
 
 .step {
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
     padding: 14px;
     margin-bottom: 12px;
     border: 1.5px solid var(--neon-green);
     border-radius: 10px;
     cursor: pointer;
-    background: rgba(0,0,0,0.4);
-    font-weight: 400;
-    text-transform: uppercase;
+    background: rgba(0,0,0,0.3);
     font-size: 12px;
-    transition: all 0.3s ease;
-    /* Forzo l'animazione anche su mobile */
+    text-transform: uppercase;
     animation: pulseGlowAzzurro 3.5s infinite ease-in-out;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
 }
 
 @keyframes pulseGlowAzzurro {
-    0% { transform: scale(1); border-color: var(--neon-green); }
-    50% { 
-        transform: scale(1.025); 
-        border-color: rgba(0, 238, 255, 0.8); 
-        box-shadow: 0 0 15px rgba(0, 174, 239, 0.4); 
-    }
-    100% { transform: scale(1); border-color: var(--neon-green); }
+    0%, 100% { transform: scale(1); border-color: var(--neon-green); }
+    50% { transform: scale(1.025); border-color: rgba(0, 238, 255, 0.8); box-shadow: 0 0 12px rgba(0, 174, 239, 0.3); }
 }
 
 .step:nth-child(2) { animation-delay: 0s; }
@@ -128,55 +104,23 @@ body, html {
 .step:nth-child(5) { animation-delay: 2.1s; }
 .step:nth-child(6) { animation-delay: 2.8s; }
 
-.step:hover {
-    background: var(--neon-green);
-    color: #000;
-    transform: scale(1.06) !important;
-    animation-play-state: paused;
-}
-
 .popover {
     position: fixed;
     display: none;
     width: 260px;
-    background: rgba(5, 202, 47, 0.96); 
+    background: rgba(5, 202, 47, 0.95);
     padding: 18px;
     border-radius: 12px;
-    border: 1px solid white; 
-    z-index: 1100;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+    border: 1px solid white;
+    color: white;
     text-align: center;
+    z-index: 1100;
 }
 
-.popover h4 { 
-    margin: 0 0 8px 0; 
-    color: white; 
-    text-transform: uppercase; 
-    font-size: 16px; 
-    font-weight: 900;
-    letter-spacing: 1px;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.7), 0 0 5px rgba(0,0,0,0.4);
-} 
+.popover h4 { margin: 0 0 8px 0; font-weight: 900; text-shadow: 1px 1px 2px #000; }
+.popover p { margin: 0; font-weight: 700; text-shadow: 1px 1px 1px #000; }
 
-.popover p { 
-    margin: 0; 
-    color: white; 
-    font-size: 14px; 
-    line-height: 1.4; 
-    font-weight: 700; 
-    text-shadow: 1px 1px 1px rgba(0,0,0,0.6), 0 0 4px rgba(0,0,0,0.3);
-}
-
-.audio-ctrl {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border-left: 1px solid rgba(255,255,255,0.3);
-    padding-left: 20px;
-}
-
-.audio-ctrl.glow { filter: drop-shadow(0 0 8px var(--plato-orange)); }
+.audio-ctrl { cursor: pointer; display: flex; align-items: center; gap: 8px; border-left: 1px solid rgba(255,255,255,0.3); padding-left: 20px; }
 
 .bottom-box {
     position: absolute;
@@ -184,45 +128,34 @@ body, html {
     left: 50%;
     transform: translateX(-50%);
     width: 340px;
-    background: rgba(0,0,0,0.85);
+    background: rgba(0,0,0,0.8);
     padding: 15px;
     border-radius: 12px;
     text-align: center;
-    color: white;
     border: 1.5px solid var(--neon-green);
-    backdrop-filter: blur(5px);
 }
 
-.bottom-box h4 { margin: 0 0 5px 0; color: var(--neon-green); font-size: 20px; text-transform: uppercase; }
-.bottom-box p { margin: 0; font-size: 13px; opacity: 0.9; line-height: 1.4; }
-
+/* RESPONSIVE FISSARE AL CENTRO E PADDING PICCOLI */
 @media (max-width: 768px) {
     .nav-wrapper { top: 15px; right: 0; left: 0; width: 100%; display: flex; justify-content: center; }
-    .top-nav { width: 90%; gap: 10px; padding: 10px 15px; }
+    .top-nav { gap: 12px; padding: 10px 15px; border-radius: 20px; width: 90%; justify-content: center; }
     .top-nav a { font-size: 8px; letter-spacing: 0.5px; }
-    .audio-ctrl { padding-left: 10px; }
     
-    .piano-operativo { width: 75%; top: 55%; padding: 18px; }
-    .piano-operativo h3 { font-size: 16px; }
-    
-    /* Forza visibilità animazione su mobile */
-    .step { 
-        font-size: 10px; 
-        padding: 10px; 
-        margin-bottom: 8px;
+    .piano-operativo { width: 35%; top: 60%; padding: 12px; }
+    .piano-operativo h3 { font-size: 14px; margin-bottom: 10px; }
+
+    .step {
+        font-size: 9px;
+        padding: 6px;
+        margin-bottom: 5px;
         animation: pulseGlowAzzurro 3.5s infinite ease-in-out !important;
     }
-    
-    .popover { width: 70%; left: 15% !important; transform: none !important; padding: 15px; }
-    .popover h4 { font-size: 14px; }
-    .popover p { font-size: 12px; }
-    
-    .bottom-box { width: 85%; bottom: 8%; }
-    .bottom-box h4 { font-size: 14px; }
+
+    .popover { left: 50% !important; transform: translateX(-50%) !important; top: 30% !important; width: 50%; }
+    .bottom-box { width: 85%; bottom: 10%; }
 }
 </style>
 </head>
-
 <body>
 <div class="hero">
     <div class="nav-wrapper">
@@ -231,72 +164,51 @@ body, html {
             <a href="chi-siamo.html" style="color:white">Chi Siamo</a>
             <a href="clienti.html">Clienti</a>
             <a href="contatti.html">Contatti</a>
-            <div class="audio-ctrl glow" id="audioToggle">
-                <svg id="iconOn" width="20" height="20" viewBox="0 0 24 24" fill="#ffffff">
-                    <path d="M3 9V15H7L12 20V4L7 9H3Z"/><path d="M16.5 12C16.5 10.23 15.46 8.71 14 7.97V16.03C15.46 15.29 16.5 13.77 16.5 12Z"/><path d="M14 3.23V5.29C17.39 6.15 20 8.83 20 12C20 15.17 17.39 17.85 14 18.71V20.77C18.45 19.86 22 16.28 22 12C22 7.72 18.45 4.14 14 3.23Z"/>
-                </svg>
-                <svg id="iconOff" width="20" height="20" viewBox="0 0 24 24" fill="#ffffff" style="display:none;">
-                    <path d="M3 9V15H7L12 20V4L7 9H3Z"/><path d="M16 8L20 12L16 16" stroke="#ffffff" stroke-width="2" fill="none"/>
-                </svg>
+            <div class="audio-ctrl" id="audioToggle">
+                <svg id="iconOn" width="20" height="20" viewBox="0 0 24 24" fill="#ffffff"><path d="M3 9V15H7L12 20V4L7 9H3Z"/><path d="M16.5 12C16.5 10.23 15.46 8.71 14 7.97V16.03C15.46 15.29 16.5 13.77 16.5 12Z"/><path d="M14 3.23V5.29C17.39 6.15 20 8.83 20 12C20 15.17 17.39 17.85 14 18.71V20.77C18.45 19.86 22 16.28 22 12C22 7.72 18.45 4.14 14 3.23Z"/></svg>
+                <svg id="iconOff" width="20" height="20" viewBox="0 0 24 24" fill="#ffffff" style="display:none;"><path d="M3 9V15H7L12 20V4L7 9H3Z"/><path d="M16 8L20 12L16 16" stroke="#ffffff" stroke-width="2" fill="none"/></svg>
             </div>
         </nav>
     </div>
-
     <div class="piano-operativo">
         <h3>Piano Operativo</h3>
         <div class="step" data-title="Analisi Dati" data-text="Studio e valutazione di costi sostenuti negli ultimi due mesi.">1. Analisi Dati</div>
         <div class="step" data-title="Benchmarking" data-text="Confronto dei costi con i nostri listini per identificare le aree di miglioramento.">2. Benchmarking</div>
         <div class="step" data-title="Presentazione risparmio" data-text="Presentazione del valore stimato del risparmio.">3. Presentazione risparmio</div>
-        <div class="step" data-title="Disintermediazione" data-text="Proposta di cambio di modello di acquisto.<br>Qualità dei prodotti uguale o superiore.">4. Disintermediazione</div>
-        <div class="step" data-title="Monitoraggio SaaS" data-text="Platò offre assistenza continuativa e monitoraggio nel tempo per garantire il risparmio.">5. Monitoraggio SaaS</div>
+        <div class="step" data-title="Disintermediazione" data-text="Proposta di cambio di modello di acquisto.<br>Qualità uguale o superiore.">4. Disintermediazione</div>
+        <div class="step" data-title="Monitoraggio SaaS" data-text="Assistenza continuativa e monitoraggio nel tempo.">5. Monitoraggio SaaS</div>
     </div>
-
     <div id="popover" class="popover"></div>
-
     <div class="bottom-box">
         <h4>Offre Platò</h4>
-        <p>Il servizio è totalmente gratuito. Nessuna commissione richiesta, neanche dopo la sottoscrizione.</p>
+        <p>Il servizio è totalmente gratuito. Nessuna commissione richiesta.</p>
     </div>
 </div>
-
 <audio id="bgAudio" src="restaurant.mp3" autoplay loop></audio>
-
 <script>
 document.addEventListener('DOMContentLoaded', () => {
     const pop = document.getElementById('popover');
     const steps = document.querySelectorAll('.step');
-    const audio = document.getElementById('bgAudio');
-
     steps.forEach(step => {
         step.addEventListener('click', (e) => {
-            const title = step.dataset.title;
-            const text = step.dataset.text;
-            pop.innerHTML = `<h4>${title}</h4><p>${text}</p>`;
+            pop.innerHTML = `<h4>${step.dataset.title}</h4><p>${step.dataset.text}</p>`;
             pop.style.display = 'block';
-
             if(window.innerWidth > 768) {
                 const rect = step.getBoundingClientRect();
                 pop.style.top = (rect.top) + 'px';
-                pop.style.left = (rect.right + 25) + 'px';
+                pop.style.left = (rect.right + 20) + 'px';
             }
-
             clearTimeout(pop._timer);
             pop._timer = setTimeout(() => { pop.style.display = 'none'; }, 4500);
         });
     });
-
+    const audio = document.getElementById('bgAudio');
     const toggle = document.getElementById('audioToggle');
-    const iconOn = document.getElementById('iconOn');
-    const iconOff = document.getElementById('iconOff');
     audio.volume = 0.25;
     let playing = true;
-
     toggle.addEventListener('click', () => {
-        if (playing) {
-            audio.pause(); iconOn.style.display = "none"; iconOff.style.display = "block"; toggle.classList.remove("glow");
-        } else {
-            audio.play(); iconOff.style.display = "none"; iconOn.style.display = "block"; toggle.classList.add("glow");
-        }
+        if (playing) { audio.pause(); document.getElementById('iconOn').style.display="none"; document.getElementById('iconOff').style.display="block"; }
+        else { audio.play(); document.getElementById('iconOff').style.display="none"; document.getElementById('iconOn').style.display="block"; }
         playing = !playing;
     });
 });
