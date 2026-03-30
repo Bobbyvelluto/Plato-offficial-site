@@ -14,15 +14,13 @@
     --text-light: #ffffff;
 }
 
-/* Fix caricamento: sfondo nero subito, poi immagine */
 body, html {
     margin: 0; padding: 0; height: 100%;
     font-family: 'Inter', sans-serif; 
     background-color: #0d0d0d; 
-    overflow: hidden; /* Evita scrollbars */
+    overflow: hidden;
 }
 
-/* SFONDO OTTIMIZZATO */
 .hero {
     position: relative;
     width: 100%;
@@ -37,7 +35,6 @@ body, html {
     to { opacity: 1; }
 }
 
-/* NAVIGAZIONE */
 .nav-wrapper {
     position: absolute;
     top: 30px;
@@ -71,7 +68,6 @@ body, html {
     text-shadow: 0 0 8px var(--plato-orange);
 }
 
-/* PIANO OPERATIVO */
 .piano-operativo {
     position: absolute;
     top: 50%;
@@ -96,7 +92,6 @@ body, html {
     letter-spacing: 1px;
 }
 
-/* STEP CON PULSAZIONE AZZURRA LEGGERA */
 .step {
     display: block;
     width: 100%;
@@ -111,45 +106,40 @@ body, html {
     text-transform: uppercase;
     font-size: 12px;
     transition: all 0.3s ease;
-    /* Animazione resa più evidente */
+    /* Forzo l'animazione anche su mobile */
     animation: pulseGlowAzzurro 3.5s infinite ease-in-out;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
-/* Nuova Animazione Pulsante: Bordo Azzurro Ciano Leggero */
 @keyframes pulseGlowAzzurro {
-    0% { transform: scale(1); filter: brightness(1); border-color: var(--neon-green); }
+    0% { transform: scale(1); border-color: var(--neon-green); }
     50% { 
         transform: scale(1.025); 
-        filter: brightness(1.2); 
-        /* Azzurro ciano leggero al posto del bianco */
-        border-color: rgba(0, 238, 255, 0.6); 
-        box-shadow: 0 0 12px rgba(0, 174, 239, 0.25); 
+        border-color: rgba(0, 238, 255, 0.8); 
+        box-shadow: 0 0 15px rgba(0, 174, 239, 0.4); 
     }
-    100% { transform: scale(1); filter: brightness(1); border-color: var(--neon-green); }
+    100% { transform: scale(1); border-color: var(--neon-green); }
 }
 
-/* Ritardi per effetto cascata */
 .step:nth-child(2) { animation-delay: 0s; }
 .step:nth-child(3) { animation-delay: 0.7s; }
 .step:nth-child(4) { animation-delay: 1.4s; }
 .step:nth-child(5) { animation-delay: 2.1s; }
 .step:nth-child(6) { animation-delay: 2.8s; }
 
-/* Hover: diventa Verde Pieno e si ferma */
 .step:hover {
     background: var(--neon-green);
     color: #000;
     transform: scale(1.06) !important;
     animation-play-state: paused;
-    box-shadow: 0 5px 20px rgba(50, 205, 50, 0.4);
 }
 
-/* POPOVER OTTIMIZZATO PER LEGGIBILITÀ */
 .popover {
     position: fixed;
     display: none;
     width: 260px;
-    background: rgba(5, 202, 47, 0.96); /* Più opaco */
+    background: rgba(5, 202, 47, 0.96); 
     padding: 18px;
     border-radius: 12px;
     border: 1px solid white; 
@@ -158,7 +148,6 @@ body, html {
     text-align: center;
 }
 
-/* Testo Popover: Bianco con Ombra Scura Netta */
 .popover h4 { 
     margin: 0 0 8px 0; 
     color: white; 
@@ -166,21 +155,18 @@ body, html {
     font-size: 16px; 
     font-weight: 900;
     letter-spacing: 1px;
-    /* Ombra testo per massima leggibilità */
     text-shadow: 1px 1px 2px rgba(0,0,0,0.7), 0 0 5px rgba(0,0,0,0.4);
 } 
 
 .popover p { 
     margin: 0; 
-    color: white; /* Testo Bianco */
+    color: white; 
     font-size: 14px; 
     line-height: 1.4; 
-    font-weight: 700; /* Più spesso per leggere meglio */
-    /* Ombra testo rinforzata */
+    font-weight: 700; 
     text-shadow: 1px 1px 1px rgba(0,0,0,0.6), 0 0 4px rgba(0,0,0,0.3);
 }
 
-/* AUDIO CTRL */
 .audio-ctrl {
     cursor: pointer;
     display: flex;
@@ -188,12 +174,10 @@ body, html {
     gap: 8px;
     border-left: 1px solid rgba(255,255,255,0.3);
     padding-left: 20px;
-    transition: 0.3s;
 }
 
 .audio-ctrl.glow { filter: drop-shadow(0 0 8px var(--plato-orange)); }
 
-/* OFFRE PLATÒ */
 .bottom-box {
     position: absolute;
     bottom: 5%;
@@ -212,7 +196,6 @@ body, html {
 .bottom-box h4 { margin: 0 0 5px 0; color: var(--neon-green); font-size: 20px; text-transform: uppercase; }
 .bottom-box p { margin: 0; font-size: 13px; opacity: 0.9; line-height: 1.4; }
 
-/* RESPONSIVE */
 @media (max-width: 768px) {
     .nav-wrapper { top: 15px; right: 0; left: 0; width: 100%; display: flex; justify-content: center; }
     .top-nav { width: 90%; gap: 10px; padding: 10px 15px; }
@@ -221,7 +204,14 @@ body, html {
     
     .piano-operativo { width: 75%; top: 55%; padding: 18px; }
     .piano-operativo h3 { font-size: 16px; }
-    .step { font-size: 10px; padding: 10px; margin-bottom: 8px; }
+    
+    /* Forza visibilità animazione su mobile */
+    .step { 
+        font-size: 10px; 
+        padding: 10px; 
+        margin-bottom: 8px;
+        animation: pulseGlowAzzurro 3.5s infinite ease-in-out !important;
+    }
     
     .popover { width: 70%; left: 15% !important; transform: none !important; padding: 15px; }
     .popover h4 { font-size: 14px; }
@@ -277,29 +267,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const steps = document.querySelectorAll('.step');
     const audio = document.getElementById('bgAudio');
 
-    // Funzione click step
     steps.forEach(step => {
         step.addEventListener('click', (e) => {
             const title = step.dataset.title;
             const text = step.dataset.text;
-            // Popover popolato
             pop.innerHTML = `<h4>${title}</h4><p>${text}</p>`;
             pop.style.display = 'block';
 
-            // Posizionamento Desktop a destra dello step
             if(window.innerWidth > 768) {
                 const rect = step.getBoundingClientRect();
                 pop.style.top = (rect.top) + 'px';
                 pop.style.left = (rect.right + 25) + 'px';
             }
 
-            // Auto-chiusura
             clearTimeout(pop._timer);
             pop._timer = setTimeout(() => { pop.style.display = 'none'; }, 4500);
         });
     });
 
-    // Audio Toggle
     const toggle = document.getElementById('audioToggle');
     const iconOn = document.getElementById('iconOn');
     const iconOff = document.getElementById('iconOff');
