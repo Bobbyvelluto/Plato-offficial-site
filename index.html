@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home | Platò</title>
+    <title>Home | Plato Official Site</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -77,7 +77,7 @@
             opacity: 0;
             animation: fadeInUp var(--fade-speed) ease-out forwards 0.3s;
             padding: 0 40px;
-            margin-top: 500px; /* Altezza Desktop */
+            margin-top: 500px; 
         }
         
         h1 { 
@@ -97,7 +97,7 @@
             letter-spacing: 6px;
             margin-top: 15px;
             font-weight: 400;
-            white-space: nowrap; /* Evita che vada a capo su desktop */
+            white-space: nowrap; 
         }
 
         .highlight-green {
@@ -109,13 +109,73 @@
         .coccarda-container {
             margin-top: 30px;
             text-align: center;
+            position: relative;
+            display: inline-block;
         }
 
         .coccarda-img {
             width: 150px;
             height: auto;
-            mix-blend-mode: multiply;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             filter: contrast(110%);
+            /* Animazione pulsante per attirare l'attenzione */
+            animation: softPulse 3s infinite ease-in-out;
+        }
+
+        @keyframes softPulse {
+            0%, 100% { transform: scale(1); filter: contrast(110%); }
+            50% { transform: scale(1.03); filter: contrast(110%) drop-shadow(0 0 8px rgba(57, 255, 20, 0.3)); }
+        }
+
+        /* Hover su Desktop */
+        .coccarda-img:hover {
+            filter: contrast(110%) drop-shadow(0 0 15px var(--neon-green));
+            transform: scale(1.05);
+        }
+
+        /* Stato Attivo (Click/Tap) */
+        .coccarda-img.active {
+            filter: contrast(110%) drop-shadow(0 0 20px var(--neon-green));
+            transform: scale(1.08);
+            animation: none; /* Ferma la pulsazione quando attiva */
+        }
+
+        .popover-gpi {
+            position: absolute;
+            top: 110%; 
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            background: rgba(57, 255, 20, 0.95); 
+            color: #ffffff; 
+            padding: 14px 22px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 800;
+            width: 280px;
+            text-transform: uppercase;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            pointer-events: none;
+            opacity: 0;
+            transition: all 0.4s ease;
+            z-index: 2000;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.6), 0 0 5px rgba(0,0,0,0.3); 
+        }
+
+        .popover-gpi::after {
+            content: '';
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            margin-left: -8px;
+            border-width: 8px;
+            border-style: solid;
+            border-color: transparent transparent rgba(57, 255, 20, 0.95) transparent;
+        }
+
+        .popover-gpi.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
         }
 
         @keyframes fadeInUp {
@@ -125,33 +185,13 @@
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* --- MODIFICHE RESPONSIVE --- */
         @media (max-width: 768px) {
-            .nav-wrapper {
-                top: 20px;
-                right: 50%;
-                transform: translateX(50%); /* Centra il menu su mobile */
-                width: 90%;
-            }
-
-            .header-content { 
-                margin-top: 350px; /* Abbassato per non coprire il soggetto */
-                padding: 0 20px;
-            }
-
+            .nav-wrapper { top: 20px; right: 50%; transform: translateX(50%); width: 90%; }
+            .header-content { margin-top: 350px; padding: 0 20px; }
             h1 { font-size: 26px; }
-
-            h1 span.sub-line { 
-                font-size: 13px; 
-                letter-spacing: 2px;
-                white-space: nowrap; /* Forza il testo su una riga sola */
-                margin-top: 10px;
-            }
-
-            .coccarda-img { 
-                width: 90px; 
-                margin-top: 10px;
-            }
+            h1 span.sub-line { font-size: 13px; letter-spacing: 2px; white-space: nowrap; margin-top: 10px; }
+            .coccarda-img { width: 100px; margin-top: 10px; }
+            .popover-gpi { width: 220px; font-size: 11px; padding: 10px 15px; }
         }
     </style>
 </head>
@@ -175,10 +215,35 @@
                 <span class="sub-line">Senza filtri, <span class="highlight-green">solo qualità</span></span>
             </h1>
             <div class="coccarda-container">
-                <img src="coccarda.png" class="coccarda-img" alt="Certificato Platò">
+                <div id="gpi-popover" class="popover-gpi">
+                    Ogni partnership Platò è validata dal Protocollo di Ottimizzazione dei Costi
+                </div>
+                <img src="coccarda.png" id="coccarda" class="coccarda-img" alt="Certificato Platò">
             </div>
         </div>
     </div>
+
+    <script>
+        const coccarda = document.getElementById('coccarda');
+        const popover = document.getElementById('gpi-popover');
+        let timer;
+
+        function activatePopover() {
+            // Se c'è un timer attivo, lo resetto
+            clearTimeout(timer);
+            
+            popover.classList.add('show');
+            coccarda.classList.add('active');
+
+            timer = setTimeout(() => {
+                popover.classList.remove('show');
+                coccarda.classList.remove('active');
+            }, 3800);
+        }
+
+        // Funziona sia su click che su touch (mobile)
+        coccarda.addEventListener('click', activatePopover);
+    </script>
 
 </body>
 </html>
