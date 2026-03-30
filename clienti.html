@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I Nostri Clienti | Platò</title>
+    <title>I Nostri Clienti | Plato Official Site</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
 
     <style>
@@ -49,8 +49,9 @@
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            padding-right: 30px;
+            padding-right: 50px; /* Aumentato per sicurezza */
             z-index: 2000;
+            box-sizing: border-box;
         }
 
         .top-nav a {
@@ -70,6 +71,7 @@
             gap: 8px;
             border-left: 1px solid rgba(255,255,255,0.3);
             padding-left: 20px;
+            min-width: 60px; /* Impedisce alla scritta ON/OFF di scappare */
         }
 
         .speaker-svg { width: 18px; height: 18px; fill: #fff; }
@@ -96,7 +98,6 @@
             z-index: 10;
         }
 
-        /* --- LOGO CENTRALE E COCCARDA SOVRAPPOSTA --- */
         .center-logo-box {
             position: absolute;
             z-index: 20;
@@ -111,14 +112,11 @@
             display: block;
         }
 
-        /* La coccarda come timbro interno, posizionata sopra la scritta */
         .gpi-seal-inline {
             position: absolute;
-            /* Posiziona in basso al centro all'interno del cerchio */
             bottom: 11%; 
             left: 50%;
             transform: translateX(-50%);
-            /* DIMENSIONI AUMENTATE (era 14%) */
             width: 20%; 
             height: auto;
             z-index: 25;
@@ -159,6 +157,7 @@
             );
         }
 
+        /* --- SATELLITE STILE PULITO --- */
         .sat-card {
             background: #fff;
             border-radius: 50%;
@@ -167,12 +166,12 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            border: 3px solid var(--plato-orange);
+            border: 1px solid var(--plato-orange); /* Bordo Sottile */
             box-shadow: 0 0 12px rgba(255, 140, 0, 0.4);
             animation: pulseSat 4s infinite ease-in-out;
             transition: all 0.3s ease;
             overflow: hidden;
-            padding: 5px;
+            padding: 10px; /* Più spazio interno */
             box-sizing: border-box;
         }
 
@@ -197,17 +196,17 @@
             font-weight: 800;
             text-transform: uppercase;
             text-align: center;
-            width: 88%;
+            width: 80%; /* Più stretto per non toccare i bordi bianchi */
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .sat-name-inner span { font-size: 7px; white-space: nowrap; }
-        .long-text span { font-size: 5.5px; }
+        .sat-name-inner span { font-size: 6.5px; white-space: nowrap; }
+        .long-text span { font-size: 5px; }
 
         /* ========================================================= */
-        /* ====================== TABLET ============================ */
+        /* ====================== RESPONSIV ========================= */
         /* ========================================================= */
 
         @media (max-width: 1024px) {
@@ -219,34 +218,45 @@
             h2 { font-size: 12px; letter-spacing: 3px; }
             .header-section { top: 110px; }
             .center-logo-box { width: 28vh; }
+            .top-nav { padding-right: 40px; }
         }
-
-        /* ========================================================= */
-        /* ====================== MOBILE ============================ */
-        /* ========================================================= */
 
         @media (max-width: 768px) {
             :root {
                 --orbit-radius: 125px; 
-                --sat-size: 60px;
+                --sat-size: 62px;
             }
 
             .center-logo-box { width: 22vh; }
             
             .gpi-seal-inline {
                 bottom: 11%; 
-                width: 22%; /* Leggermente più grande su mobile per leggibilità */
+                width: 22%; 
             }
 
-            .sat-logo-inner { width: 48%; margin-bottom: 2px; }
-            .sat-name-inner span { font-size: 6px; }
-            .long-text span { font-size: 4.5px; }
+            .top-nav { 
+                height: 60px; 
+                padding-right: 20px; 
+            }
+            .top-nav a { font-size: 10px; margin-left: 10px; }
+            .audio-ctrl { 
+                margin-left: 10px; 
+                padding-left: 10px;
+                min-width: 50px;
+            }
+
+            .sat-card { 
+                padding: 10px; 
+                border-width: 1px; 
+            }
+            .sat-logo-inner { width: 40%; margin-bottom: 2px; }
+            .sat-name-inner { width: 85%; }
+            .sat-name-inner span { font-size: 5.5px; }
+            .long-text span { font-size: 4.2px; }
 
             h1 { font-size: 26px; }
-            h2 { font-size: 11px; letter-spacing: 2px; }
-            .header-section { top: 90px; }
-            .top-nav { height: 60px; padding-right: 15px; }
-            .top-nav a { font-size: 11px; margin-left: 12px; }
+            h2 { font-size: 10px; letter-spacing: 1.5px; }
+            .header-section { top: 85px; }
         }
 
     </style>
